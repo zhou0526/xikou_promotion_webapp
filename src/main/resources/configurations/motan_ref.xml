@@ -52,4 +52,8 @@
     <motan:referer id="promotionService"
                    interface="com.xikou.promotion.api.service.PromotionService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
+    <motan:referer id="activityService"
+                   interface="com.xikou.promotion.api.service.activity.ActivityService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 </beans>
