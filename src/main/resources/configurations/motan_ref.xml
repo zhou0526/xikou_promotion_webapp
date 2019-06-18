@@ -21,7 +21,7 @@
        http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
 
     <!-- 本地调试模式,不使用注册中心 -->
-    <motan:registry regProtocol="direct" name="promotion-direct-registry" address="127.0.0.1" port="3001"/>
+    <motan:registry regProtocol="direct" name="promotion-direct-registry" address="127.0.0.1" port="3007"/>
 
     <!--zookeeper注册方式-->
     <motan:registry regProtocol="zookeeper" name="promotion-zk-registry" address="${registry.zookeeper.address}"
