@@ -56,13 +56,13 @@ public class ActivityVo implements Serializable {
 	@ApiModelProperty(value = "活动排序字段")
 	private Integer sortBy;
 	@ApiModelProperty(value = "开关状态 1: 开启  2:关闭")
-	private Byte switchState;
+	private Byte switchState = 2;
 	@ApiModelProperty(value = "活动备注")
 	private String remark;
 	@ApiModelProperty(value = "活动状态 1: 未开始  2:预热中 3: 活动中 4: 已失效")
-	private Byte state;
+	private Byte state = 1;
 	@ApiModelProperty(value = "逻辑删除字段(1: 未删除 2: 已删除)")
-	private Byte isDeleted;
+	private Byte isDeleted = 1;
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 	@ApiModelProperty(value = "修改时间")

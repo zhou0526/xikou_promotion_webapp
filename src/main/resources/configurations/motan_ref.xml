@@ -65,4 +65,8 @@
     <motan:referer id="RuleService"
                    interface="com.xikou.promotion.api.service.rule.RuleService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
+    <motan:referer id="activityCommodityService"
+                   interface="com.xikou.promotion.api.service.activity.ActivityCommodityService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 </beans>
