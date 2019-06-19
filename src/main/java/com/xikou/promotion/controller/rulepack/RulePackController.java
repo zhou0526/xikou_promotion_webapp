@@ -68,4 +68,14 @@ public class RulePackController {
         }
         return new ResponseEntity(ResponseVo.success("删除成功", id), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "根据活动或活动商品分页查询规格包引用", notes = "根据活动或活动商品分页查询规格包引用")
+    @ResponseBody
+    @RequestMapping(value = "/RulePackQuote/{packType}", method = RequestMethod.GET)
+    public ResponseEntity<ResponseVo<RulePackVo>> querySepcQuote( @PathVariable("packType") Byte packType,@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+        PaginationModel<RulePackModel> rulePackModel = rulePackService.queryRulePackQuote(packType, (page - 1) * limit, limit);
+        PaginationVo<RulePackVo> rulePackVo = VoConvertor.convertPaginationModelToVo(rulePackModel, RulePackVo.class);
+        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+        return new ResponseEntity<ResponseVo<RulePackVo>>(ResponseVo.success("查询成功", rulePackVo), HttpStatus.OK);
+    }
 }

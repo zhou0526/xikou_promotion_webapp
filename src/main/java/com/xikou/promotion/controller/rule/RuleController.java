@@ -1,6 +1,5 @@
 package com.xikou.promotion.controller.rule;
 
-import com.xikou.promotion.api.condition.RuleCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import com.xikou.common.model.PaginationModel;
 import com.xikou.common.model.PaginationVo;
 import com.xikou.common.utils.EntityCopyUtils;
 import com.xikou.common.utils.VoConvertor;
+import com.xikou.promotion.api.condition.RuleCondition;
 import com.xikou.promotion.api.exception.BusinessException;
 import com.xikou.promotion.api.model.RuleModel;
 import com.xikou.promotion.api.service.rule.RuleService;
@@ -67,4 +67,13 @@ public class RuleController {
         return new ResponseEntity(ResponseVo.success("删除成功", id), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "规则包分页查询规则引用", notes = "规则包分页查询规则引用")
+    @ResponseBody
+    @RequestMapping(value = "/queryRuleQuote", method = RequestMethod.GET)
+    public ResponseEntity<ResponseVo<RuleVo>> queryRuleQuote(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+        PaginationModel<RuleModel> ruleModel = ruleService.queryRuleQuote((page - 1) * limit, limit);
+        PaginationVo<RuleVo> ruleVo = VoConvertor.convertPaginationModelToVo(ruleModel, RuleVo.class);
+        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+        return new ResponseEntity<ResponseVo<RuleVo>>(ResponseVo.success("查询成功", ruleVo), HttpStatus.OK);
+    }
 }
