@@ -49,7 +49,7 @@ public class ActivityCommodityVo implements Serializable {
 	@ApiModelProperty("优先级")
 	private Integer priority;
 	@ApiModelProperty("逻辑删除字段  (1: 未删除 2: 已删除)")
-	private Byte isDeleted;
+	private Byte isDeleted = 1;
 	@ApiModelProperty("创建时间")
 	private Date createTime;
 	@ApiModelProperty("修改时间")

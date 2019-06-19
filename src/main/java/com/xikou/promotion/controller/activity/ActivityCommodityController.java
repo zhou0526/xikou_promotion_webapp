@@ -81,17 +81,17 @@ public class ActivityCommodityController {
 
 	@ApiOperation(value = "查看活动商品", notes = "查看活动商品")
 	@ResponseBody
-	@RequestMapping(value = "/modifyActivityCommodity/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/queryActivityCommodityById/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseVo<ActivityCommodityVo>> queryActivityCommodityById(@PathVariable String id) throws BusinessException {
 		try {
 			ActivityCommodityVo activityCommodityVo = EntityCopyUtils.copyBean(activityCommodityService.queryActivityCommodityById(id), ActivityCommodityVo.class);
-			return new ResponseEntity<>(ResponseVo.success("修改成功", activityCommodityVo), HttpStatus.OK);
+			return new ResponseEntity<>(ResponseVo.success("操作成功", activityCommodityVo), HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
 		}
 	}
 
-	@ApiOperation(value = "查看活动商品", notes = "查看活动商品")
+	@ApiOperation(value = "删除活动商品", notes = "删除活动商品")
 	@ResponseBody
 	@RequestMapping(value = "/deleteActivityCommodityById/{id}", method = RequestMethod.POST)
 	public ResponseEntity<ResponseVo> deleteActivityCommodityById(@PathVariable String id) throws BusinessException {
