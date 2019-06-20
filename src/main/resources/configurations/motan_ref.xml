@@ -69,4 +69,12 @@
     <motan:referer id="activityCommodityService"
                    interface="com.xikou.promotion.api.service.activity.ActivityCommodityService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
+    <motan:referer id="commodityCombinedService"
+                   interface="com.xikou.promotion.api.service.activity.CommodityCombinedService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
+    <motan:referer id="commodityGiftLibraryService"
+                   interface="com.xikou.promotion.api.service.activity.CommodityGiftLibraryService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 </beans>
