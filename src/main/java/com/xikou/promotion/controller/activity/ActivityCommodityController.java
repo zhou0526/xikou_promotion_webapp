@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.xikou.common.model.PaginationModel;
 import com.xikou.common.model.PaginationVo;
 import com.xikou.common.utils.EntityCopyUtils;
@@ -17,7 +16,6 @@ import com.xikou.promotion.api.model.ActivityCommodityModel;
 import com.xikou.promotion.api.service.activity.ActivityCommodityService;
 import com.xikou.promotion.common.ResponseVo;
 import com.xikou.promotion.vo.ActivityCommodityVo;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -40,7 +38,8 @@ public class ActivityCommodityController {
 	@ApiOperation(value = "活动商品列表", notes = "活动商品列表")
 	@ResponseBody
 	@RequestMapping(value = "/queryActivityCommodityList", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<ActivityCommodityVo>> queryActivityCommodityList(ActivityCommodityCondition condition, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) throws BusinessException {
+	public ResponseEntity<ResponseVo<ActivityCommodityVo>> queryActivityCommodityList(ActivityCommodityCondition condition, //
+		@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
 		if (condition == null) {
 			condition = new ActivityCommodityCondition();
 		}
@@ -55,8 +54,8 @@ public class ActivityCommodityController {
 
 	@ApiOperation(value = "新增活动商品", notes = "新增活动商品")
 	@ResponseBody
-	@RequestMapping(value = "/saveActivityCommodity", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> saveActivityCommodity(@RequestBody ActivityCommodityVo activityCommodityVo) throws BusinessException {
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> saveActivityCommodity(@RequestBody ActivityCommodityVo activityCommodityVo) {
 		try {
 			activityCommodityService.saveActivityCommodity(EntityCopyUtils.copyBean(activityCommodityVo, //
 				ActivityCommodityModel.class));
@@ -69,7 +68,7 @@ public class ActivityCommodityController {
 	@ApiOperation(value = "修改活动商品", notes = "修改活动商品")
 	@ResponseBody
 	@RequestMapping(value = "/modifyActivityCommodity", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> modifyActivityCommodity(@RequestBody ActivityCommodityVo activityCommodityVo) throws BusinessException {
+	public ResponseEntity<ResponseVo> modifyActivityCommodity(@RequestBody ActivityCommodityVo activityCommodityVo) {
 		try {
 			activityCommodityService.modifyActivityCommodity(EntityCopyUtils.copyBean(activityCommodityVo, //
 				ActivityCommodityModel.class));
@@ -82,7 +81,7 @@ public class ActivityCommodityController {
 	@ApiOperation(value = "查看活动商品", notes = "查看活动商品")
 	@ResponseBody
 	@RequestMapping(value = "/queryActivityCommodityById/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<ActivityCommodityVo>> queryActivityCommodityById(@PathVariable String id) throws BusinessException {
+	public ResponseEntity<ResponseVo<ActivityCommodityVo>> queryActivityCommodityById(@PathVariable String id) {
 		try {
 			ActivityCommodityVo activityCommodityVo = EntityCopyUtils.copyBean(activityCommodityService.queryActivityCommodityById(id), ActivityCommodityVo.class);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", activityCommodityVo), HttpStatus.OK);
@@ -94,7 +93,7 @@ public class ActivityCommodityController {
 	@ApiOperation(value = "删除活动商品", notes = "删除活动商品")
 	@ResponseBody
 	@RequestMapping(value = "/deleteActivityCommodityById/{id}", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> deleteActivityCommodityById(@PathVariable String id) throws BusinessException {
+	public ResponseEntity<ResponseVo> deleteActivityCommodityById(@PathVariable String id) {
 		try {
 			activityCommodityService.deleteActivityCommodityById(id);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", ""), HttpStatus.OK);

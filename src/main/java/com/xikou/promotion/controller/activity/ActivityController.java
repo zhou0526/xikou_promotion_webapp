@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.xikou.common.model.PaginationModel;
 import com.xikou.common.model.PaginationVo;
 import com.xikou.common.utils.EntityCopyUtils;
@@ -18,7 +17,6 @@ import com.xikou.promotion.api.model.ActivityModel;
 import com.xikou.promotion.api.service.activity.ActivityService;
 import com.xikou.promotion.common.ResponseVo;
 import com.xikou.promotion.vo.ActivityVo;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -42,12 +40,13 @@ public class ActivityController {
 
 	@ApiOperation(value = "活动列表", notes = "活动列表")
 	@ResponseBody
-	@RequestMapping(value = "/queryActivityList", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<ActivityVo>> queryActivityList(ActivityCondition condition, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) throws BusinessException {
+	@RequestMapping(value = "/activitys", method = RequestMethod.GET)
+	public ResponseEntity<ResponseVo<ActivityVo>> queryActivityList(ActivityCondition condition, //
+		@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
 		if (condition == null) {
 			condition = new ActivityCondition();
 		}
-		logger.error("传参错误：{}", condition);
+		logger.debug("传参错误：{}", condition);
 		PaginationModel<ActivityModel> paginationModel = activityService.queryActivity(condition, //
 			(page - 1) * limit, limit);
 		PaginationVo<ActivityVo> paginationVo = VoConvertor.convertPaginationModelToVo(paginationModel, ActivityVo.class);
@@ -58,7 +57,7 @@ public class ActivityController {
 	@ApiOperation(value = "新增活动", notes = "新增活动")
 	@ResponseBody
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> saveActivity(@RequestBody ActivityVo activityVo) throws BusinessException {
+	public ResponseEntity<ResponseVo> saveActivity(@RequestBody ActivityVo activityVo) {
 		try {
 			activityService.saveActiveity(EntityCopyUtils.copyBean(activityVo, ActivityModel.class));
 		} catch (BusinessException ex) {
@@ -70,7 +69,7 @@ public class ActivityController {
 	@ApiOperation(value = "修改活动", notes = "修改活动")
 	@ResponseBody
 	@RequestMapping(value = "/modifyActivity", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> modifyActivity(@RequestBody ActivityVo activityVo) throws BusinessException {
+	public ResponseEntity<ResponseVo> modifyActivity(@RequestBody ActivityVo activityVo) {
 		try {
 			activityService.modifyActivity(EntityCopyUtils.copyBean(activityVo, ActivityModel.class));
 		} catch (BusinessException ex) {
@@ -82,7 +81,7 @@ public class ActivityController {
 	@ApiOperation(value = "查看活动", notes = "查看活动")
 	@ResponseBody
 	@RequestMapping(value = "/queryActivity/{activityId}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<ActivityVo>> queryActivity(@PathVariable String activityId) throws BusinessException {
+	public ResponseEntity<ResponseVo<ActivityVo>> queryActivity(@PathVariable String activityId) {
 		try {
 			ActivityVo activityVo = EntityCopyUtils.copyBean(activityService.queryActivityById(activityId), ActivityVo.class);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", activityVo), HttpStatus.OK);
@@ -94,7 +93,7 @@ public class ActivityController {
 	@ApiOperation(value = "活动开启/关闭", notes = "活动开启/关闭")
 	@ResponseBody
 	@RequestMapping(value = "/startOrStopActivity", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> startOrStopActivity(@RequestBody ActivityOptionCondition condition) throws BusinessException {
+	public ResponseEntity<ResponseVo> startOrStopActivity(@RequestBody ActivityOptionCondition condition) {
 		try {
 			activityService.startOrStopActivity(condition);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", ""), HttpStatus.OK);

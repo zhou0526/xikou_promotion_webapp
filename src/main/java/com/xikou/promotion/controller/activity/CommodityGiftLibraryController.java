@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.xikou.common.model.PaginationModel;
 import com.xikou.common.model.PaginationVo;
 import com.xikou.common.utils.EntityCopyUtils;
@@ -17,7 +16,6 @@ import com.xikou.promotion.api.model.CommodityGiftLibraryModel;
 import com.xikou.promotion.api.service.activity.CommodityGiftLibraryService;
 import com.xikou.promotion.common.ResponseVo;
 import com.xikou.promotion.vo.CommodityGiftLibraryVo;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -42,7 +40,8 @@ public class CommodityGiftLibraryController {
 	@ApiOperation(value = "商品赠换品库列表", notes = "商品赠换品库列表")
 	@ResponseBody
 	@RequestMapping(value = "/queryCommodityGiftLibraryList", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<CommodityGiftLibraryVo>> queryActivityCommodityList(CommodityGiftLibraryCondition condition, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) throws BusinessException {
+	public ResponseEntity<ResponseVo<CommodityGiftLibraryVo>> queryActivityCommodityList(CommodityGiftLibraryCondition condition, //
+		@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
 		if (condition == null) {
 			condition = new CommodityGiftLibraryCondition();
 		}
@@ -57,8 +56,8 @@ public class CommodityGiftLibraryController {
 
 	@ApiOperation(value = "新增商品赠换品库", notes = "新增商品赠换品库")
 	@ResponseBody
-	@RequestMapping(value = "/saveCommodityGiftLibrary", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> saveCommodityGiftLibrary(@RequestBody CommodityGiftLibraryVo commodityGiftLibraryVo) throws BusinessException {
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> saveCommodityGiftLibrary(@RequestBody CommodityGiftLibraryVo commodityGiftLibraryVo) {
 		try {
 			commodityGiftLibraryService.saveCommodityGiftLibrary(EntityCopyUtils.copyBean(commodityGiftLibraryVo, //
 				CommodityGiftLibraryModel.class));
@@ -71,7 +70,7 @@ public class CommodityGiftLibraryController {
 	@ApiOperation(value = "修改商品赠换品库", notes = "修改商品赠换品库")
 	@ResponseBody
 	@RequestMapping(value = "/modifyCommodityGiftLibrary", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> modifyCommodityGiftLibrary(@RequestBody CommodityGiftLibraryVo commodityGiftLibraryVo) throws BusinessException {
+	public ResponseEntity<ResponseVo> modifyCommodityGiftLibrary(@RequestBody CommodityGiftLibraryVo commodityGiftLibraryVo) {
 		try {
 			commodityGiftLibraryService.modifyCommodityGiftLibrary(EntityCopyUtils.copyBean(commodityGiftLibraryVo, //
 				CommodityGiftLibraryModel.class));
@@ -84,7 +83,7 @@ public class CommodityGiftLibraryController {
 	@ApiOperation(value = "查看商品赠换品库", notes = "查看商品赠换品库")
 	@ResponseBody
 	@RequestMapping(value = "/queryCommodityGiftLibraryById/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<CommodityGiftLibraryVo>> queryCommodityGiftLibraryById(@PathVariable String id) throws BusinessException {
+	public ResponseEntity<ResponseVo<CommodityGiftLibraryVo>> queryCommodityGiftLibraryById(@PathVariable String id) {
 		try {
 			CommodityGiftLibraryVo commodityGiftLibraryVo = EntityCopyUtils.copyBean(commodityGiftLibraryService.queryCommodityGiftLibraryById(id), CommodityGiftLibraryVo.class);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", commodityGiftLibraryVo), HttpStatus.OK);
@@ -96,7 +95,7 @@ public class CommodityGiftLibraryController {
 	@ApiOperation(value = "删除商品赠换品库", notes = "删除商品赠换品库")
 	@ResponseBody
 	@RequestMapping(value = "/deleteCommodityGiftLibraryById/{id}", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> deleteCommodityGiftLibraryById(@PathVariable String id) throws BusinessException {
+	public ResponseEntity<ResponseVo> deleteCommodityGiftLibraryById(@PathVariable String id) {
 		try {
 			commodityGiftLibraryService.deleteCommodityGiftLibraryById(id);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", ""), HttpStatus.OK);

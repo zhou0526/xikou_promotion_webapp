@@ -39,7 +39,8 @@ public class CommodityCombinedController {
 	@ApiOperation(value = "组合商品库列表", notes = "组合商品库列表")
 	@ResponseBody
 	@RequestMapping(value = "/queryCommodityCombinedList", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<CommodityCombinedVo>> queryActivityCommodityList(CommodityCombinedCondition condition, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) throws BusinessException {
+	public ResponseEntity<ResponseVo<CommodityCombinedVo>> queryActivityCommodityList(CommodityCombinedCondition condition, //
+		@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
 		if (condition == null) {
 			condition = new CommodityCombinedCondition();
 		}
@@ -54,8 +55,8 @@ public class CommodityCombinedController {
 
 	@ApiOperation(value = "新增组合商品", notes = "新增组合商品")
 	@ResponseBody
-	@RequestMapping(value = "/saveCommodityCombined", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> saveCommodityCombined(@RequestBody CommodityCombinedVo CommodityCombinedVo) throws BusinessException {
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> saveCommodityCombined(@RequestBody CommodityCombinedVo CommodityCombinedVo) {
 		try {
 			commodityCombinedService.saveCommodityCombined(EntityCopyUtils.copyBean(CommodityCombinedVo, //
 				CommodityCombinedModel.class));
@@ -68,7 +69,7 @@ public class CommodityCombinedController {
 	@ApiOperation(value = "修改组合商品", notes = "修改组合商品")
 	@ResponseBody
 	@RequestMapping(value = "/modifyCommodityCombined", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> modifyCommodityCombined(@RequestBody CommodityCombinedVo CommodityCombinedVo) throws BusinessException {
+	public ResponseEntity<ResponseVo> modifyCommodityCombined(@RequestBody CommodityCombinedVo CommodityCombinedVo) {
 		try {
 			commodityCombinedService.modifyCommodityCombined(EntityCopyUtils.copyBean(CommodityCombinedVo, //
 				CommodityCombinedModel.class));
@@ -81,7 +82,7 @@ public class CommodityCombinedController {
 	@ApiOperation(value = "查看组合商品", notes = "查看组合商品")
 	@ResponseBody
 	@RequestMapping(value = "/queryCommodityCombinedById/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<CommodityCombinedVo>> queryCommodityCombinedById(@PathVariable String id) throws BusinessException {
+	public ResponseEntity<ResponseVo<CommodityCombinedVo>> queryCommodityCombinedById(@PathVariable String id) {
 		try {
 			CommodityCombinedVo CommodityCombinedVo = EntityCopyUtils.copyBean(commodityCombinedService.queryCommodityCombinedById(id), CommodityCombinedVo.class);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", CommodityCombinedVo), HttpStatus.OK);
@@ -93,7 +94,7 @@ public class CommodityCombinedController {
 	@ApiOperation(value = "删除组合商品", notes = "删除组合商品")
 	@ResponseBody
 	@RequestMapping(value = "/deleteCommodityCombinedById/{id}", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> deleteCommodityCombinedById(@PathVariable String id) throws BusinessException {
+	public ResponseEntity<ResponseVo> deleteCommodityCombinedById(@PathVariable String id) {
 		try {
 			commodityCombinedService.deleteCommodityCombinedById(id);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", ""), HttpStatus.OK);
