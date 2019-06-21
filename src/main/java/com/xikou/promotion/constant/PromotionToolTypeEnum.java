@@ -26,7 +26,7 @@ public class PromotionToolTypeEnum {
             GIFT("4", "赠品"),
             REPLACEMENT("5", "换品"),
             INTEGRAL("6", "积分")
-            ;
+			     ;
 
 		//类型
 		private String type;

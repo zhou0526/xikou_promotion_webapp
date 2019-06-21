@@ -16,7 +16,9 @@ import com.xikou.promotion.api.exception.BusinessException;
 import com.xikou.promotion.api.model.RulePackModel;
 import com.xikou.promotion.api.service.rulepack.RulePackService;
 import com.xikou.promotion.common.ResponseVo;
+import com.xikou.promotion.vo.DetailsVo;
 import com.xikou.promotion.vo.RulePackVo;
+import com.xikou.promotion.vo.RuleVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -69,7 +71,7 @@ public class RulePackController {
         return new ResponseEntity(ResponseVo.success("删除成功", id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "根据活动或活动商品分页查询规格包引用", notes = "根据活动或活动商品分页查询规格包引用")
+    @ApiOperation(value = "根据活动或活动商品分页查询规格包引用", notes = "规则包分类")
     @ResponseBody
     @RequestMapping(value = "/RulePackQuote/{packType}", method = RequestMethod.GET)
     public ResponseEntity<ResponseVo<RulePackVo>> querySepcQuote( @PathVariable("packType") Byte packType,@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
@@ -77,5 +79,30 @@ public class RulePackController {
         PaginationVo<RulePackVo> rulePackVo = VoConvertor.convertPaginationModelToVo(rulePackModel, RulePackVo.class);
         // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
         return new ResponseEntity<ResponseVo<RulePackVo>>(ResponseVo.success("查询成功", rulePackVo), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "根据ID删除规则值得规则ID", notes = "根据ID删除规则值得规则ID")
+    @ResponseBody
+    @RequestMapping(value = "/deleteRuleValueRef", method = RequestMethod.POST)
+    public ResponseEntity<RulePackVo> deleteRulePackValueRef(@RequestBody DetailsVo detailsVo) throws BusinessException {
+        try {
+            rulePackService.deleteRulePackValueRef(detailsVo.getId(),detailsVo.getValueRef());
+        } catch (BusinessException ex) {
+            return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
+        }
+        return new ResponseEntity(ResponseVo.success("删除成功", detailsVo.getId()), HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "添加规则包详情", notes = "规则包id，规则包值")
+    @ResponseBody
+    @RequestMapping(value = "/modifyRulePack", method = RequestMethod.POST)
+    public ResponseEntity<RulePackVo> modifyRulePack(@RequestBody DetailsVo detailsVo) throws BusinessException {
+        try {
+            rulePackService.modifyRulePack(detailsVo.getId(),detailsVo.getValueRef());
+        } catch (BusinessException ex) {
+            return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
+        }
+        return new ResponseEntity(ResponseVo.success("添加成功", ""), HttpStatus.OK);
     }
 }

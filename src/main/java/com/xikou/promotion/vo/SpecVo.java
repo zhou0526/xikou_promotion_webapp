@@ -26,8 +26,8 @@ public class SpecVo implements Serializable {
     private Integer offsetValue;
     @ApiModelProperty(value = "是否删除", name = "isDeleted", example = "")
     private Byte isDeleted;
-    @ApiModelProperty(value = "创建时间", name = "ruleValueRef", example = "")
+    @ApiModelProperty(value = "创建时间", name = "createTime", example = "")
     private Date createTime;
-    @ApiModelProperty(value = "修改时间", name = "ruleValueRef", example = "")
+    @ApiModelProperty(value = "修改时间", name = "updateTime", example = "")
     private Date updateTime;
 }
