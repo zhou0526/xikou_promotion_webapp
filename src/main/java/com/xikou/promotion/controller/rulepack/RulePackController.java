@@ -18,7 +18,6 @@ import com.xikou.promotion.api.service.rulepack.RulePackService;
 import com.xikou.promotion.common.ResponseVo;
 import com.xikou.promotion.vo.DetailsVo;
 import com.xikou.promotion.vo.RulePackVo;
-import com.xikou.promotion.vo.RuleVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
