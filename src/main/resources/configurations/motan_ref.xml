@@ -77,4 +77,7 @@
     <motan:referer id="commodityGiftLibraryService"
                    interface="com.xikou.promotion.api.service.activity.CommodityGiftLibraryService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+    <motan:referer id="RuleBusinessInteractionService"
+                   interface="com.xikou.promotion.api.service.rulebusinessinteraction.RuleBusinessInteractionService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 </beans>

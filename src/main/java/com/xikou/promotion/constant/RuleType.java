@@ -71,15 +71,13 @@ public  class RuleType {
         Type.add(new RuleType("13","每满金额贈","3"));
         Type.add(new RuleType("14","阶梯满金额贈","3"));
         Type.add(new RuleType("15","满数量折","1"));
-        Type.add(new RuleType("16","每满数量折","1"));
-        Type.add(new RuleType("17","阶梯满数量折","1"));
-        Type.add(new RuleType("18","满金额折","1"));
-        Type.add(new RuleType("19","每满金额折","1"));
-        Type.add(new RuleType("20","阶梯满金额折","1"));
-        Type.add(new RuleType("21","满金额抵扣","3"));
-        Type.add(new RuleType("22","满数量抵扣","3"));
-        Type.add(new RuleType("23","满金额换","2"));
-        Type.add(new RuleType("24","满数量换","2"));
+        Type.add(new RuleType("16","阶梯满数量折","1"));
+        Type.add(new RuleType("17","满金额折","1"));
+        Type.add(new RuleType("18","阶梯满金额折","1"));
+        Type.add(new RuleType("19","满金额抵扣","3"));
+        Type.add(new RuleType("20","满数量抵扣","3"));
+        Type.add(new RuleType("21","满金额换","2"));
+        Type.add(new RuleType("22","满数量换","2"));
         return  Type;
     }
 
