@@ -11,8 +11,8 @@ import lombok.ToString;
 @ToString
 public class IdListVo implements Serializable {
 
-    private static final long serialVersionUID = -2020061814643364139L;
-    @ApiModelProperty(value = "批量id", name = "ids", example = "批量操作id集合")
-    private List<String> ids;
+	private static final long serialVersionUID = -2020061814643364139L;
+	@ApiModelProperty(value = "批量id", name = "ids", example = "批量操作id集合")
+	private List<String> ids;
 
 }

@@ -28,22 +28,22 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/promotion/rulebic")
 public class RuleBusinessInteractionController {
-    private static final Logger logger = LoggerFactory.getLogger(RuleBusinessInteractionController.class);
+	private static final Logger logger = LoggerFactory.getLogger(RuleBusinessInteractionController.class);
 
-    @Autowired
-    private RuleBusinessInteractionService ruleBusinessInteractionService;
+	@Autowired
+	private RuleBusinessInteractionService ruleBusinessInteractionService;
 
-    @ApiOperation(value = "根据规则计算优惠金额", notes = "活动Id,原金额,原数量")
-    @ResponseBody
-    @RequestMapping(value = "/calculationpreferentialamount", method = RequestMethod.GET)
-    public ResponseEntity<ResponseVo<RuleBusinessInteractionVo>> querySepc(RuleBusinessInteractionCondition condition)throws BusinessException {
-        if (condition == null) {
-            condition = new RuleBusinessInteractionCondition();
-        }
-        logger.error("传入的参数：{}", condition);
-        List<RuleBusinessInteractionModel> ruleBusinessInteractionModel = ruleBusinessInteractionService.CalculationPreferentialAmount(condition);
-        List<RuleBusinessInteractionVo> Vo = EntityCopyUtils.copyList(ruleBusinessInteractionModel, RuleBusinessInteractionVo.class);
-        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
-        return new ResponseEntity<ResponseVo<RuleBusinessInteractionVo>>(ResponseVo.success("查询成功", Vo), HttpStatus.OK);
-    }
+	@ApiOperation(value = "根据规则计算优惠金额", notes = "活动Id,原金额,原数量")
+	@ResponseBody
+	@RequestMapping(value = "/calculationpreferentialamount", method = RequestMethod.GET)
+	public ResponseEntity<ResponseVo<RuleBusinessInteractionVo>> querySepc(RuleBusinessInteractionCondition condition) throws BusinessException {
+		if (condition == null) {
+			condition = new RuleBusinessInteractionCondition();
+		}
+		logger.error("传入的参数：{}", condition);
+		List<RuleBusinessInteractionModel> ruleBusinessInteractionModel = ruleBusinessInteractionService.CalculationPreferentialAmount(condition);
+		List<RuleBusinessInteractionVo> Vo = EntityCopyUtils.copyList(ruleBusinessInteractionModel, RuleBusinessInteractionVo.class);
+		// 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+		return new ResponseEntity<ResponseVo<RuleBusinessInteractionVo>>(ResponseVo.success("查询成功", Vo), HttpStatus.OK);
+	}
 }

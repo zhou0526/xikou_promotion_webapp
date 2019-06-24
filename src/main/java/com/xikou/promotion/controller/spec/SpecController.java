@@ -30,68 +30,67 @@ import io.swagger.annotations.ApiOperation;
 
 public class SpecController {
 
-    private static final Logger logger = LoggerFactory.getLogger(SpecController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SpecController.class);
 
-    @Autowired
+	@Autowired
 	private SpecService specService;
 
-    @ApiOperation(value = "新增规格", notes = "新增规格")
-    @ResponseBody
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<ResponseVo> saveSepc(@RequestBody SpecVo SpecVo) throws BusinessException {
-        try {
-            specService.saveSepc(EntityCopyUtils.copyBean(SpecVo, SpecModel.class));
-        } catch (BusinessException ex) {
-            return new ResponseEntity<>(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(ResponseVo.success("新增成功", ""), HttpStatus.OK);
-    }
+	@ApiOperation(value = "新增规格", notes = "新增规格")
+	@ResponseBody
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> saveSepc(@RequestBody SpecVo SpecVo) throws BusinessException {
+		try {
+			specService.saveSepc(EntityCopyUtils.copyBean(SpecVo, SpecModel.class));
+		} catch (BusinessException ex) {
+			return new ResponseEntity<>(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(ResponseVo.success("新增成功", ""), HttpStatus.OK);
+	}
 
-    @ApiOperation(value = "根据条件分页查询规格", notes = "规格名称")
-    @ResponseBody
-    @RequestMapping(value = "/sepcs", method = RequestMethod.GET)
-    public ResponseEntity<ResponseVo<SpecVo>> querySepc(SpecCondition condition, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
-        if (condition == null) {
-            condition = new SpecCondition();
-        }
-        logger.error("传入的参数：{}", condition);
-        PaginationModel<SpecModel> specModel = specService.querySepc(condition, (page - 1) * limit, limit);
-        PaginationVo<SpecVo> specVo = VoConvertor.convertPaginationModelToVo(specModel, SpecVo.class);
-        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
-        return new ResponseEntity<ResponseVo<SpecVo>>(ResponseVo.success("查询成功", specVo), HttpStatus.OK);
-    }
+	@ApiOperation(value = "根据条件分页查询规格", notes = "规格名称")
+	@ResponseBody
+	@RequestMapping(value = "/sepcs", method = RequestMethod.GET)
+	public ResponseEntity<ResponseVo<SpecVo>> querySepc(SpecCondition condition, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+		if (condition == null) {
+			condition = new SpecCondition();
+		}
+		logger.error("传入的参数：{}", condition);
+		PaginationModel<SpecModel> specModel = specService.querySepc(condition, (page - 1) * limit, limit);
+		PaginationVo<SpecVo> specVo = VoConvertor.convertPaginationModelToVo(specModel, SpecVo.class);
+		// 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+		return new ResponseEntity<ResponseVo<SpecVo>>(ResponseVo.success("查询成功", specVo), HttpStatus.OK);
+	}
 
-    @ApiOperation(value = "根据ID逻辑删除规格", notes = "根据ID逻辑删除规格")
-    @ResponseBody
-    @RequestMapping(value = "/deleteSepc/{id}", method = RequestMethod.POST)
-    public ResponseEntity<SpecVo> deleteSepcById(@PathVariable("id") String id) throws BusinessException {
+	@ApiOperation(value = "根据ID逻辑删除规格", notes = "根据ID逻辑删除规格")
+	@ResponseBody
+	@RequestMapping(value = "/deleteSepc/{id}", method = RequestMethod.POST)
+	public ResponseEntity<SpecVo> deleteSepcById(@PathVariable("id") String id) throws BusinessException {
 
-        try {
-            specService.deleteSepc(id);
-        } catch (BusinessException ex) {
-            return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
-        }
-        return new ResponseEntity(ResponseVo.success("删除成功", id), HttpStatus.OK);
-    }
+		try {
+			specService.deleteSepc(id);
+		} catch (BusinessException ex) {
+			return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
+		}
+		return new ResponseEntity(ResponseVo.success("删除成功", id), HttpStatus.OK);
+	}
 
+	@ApiOperation(value = "规则分页查询规格引用", notes = "规则分页查询规格引用")
+	@ResponseBody
+	@RequestMapping(value = "/SepcQuote", method = RequestMethod.GET)
+	public ResponseEntity<ResponseVo<SpecVo>> querySepcQuote(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+		PaginationModel<SpecModel> specModel = specService.querySepcQuote((page - 1) * limit, limit);
+		PaginationVo<SpecVo> specVo = VoConvertor.convertPaginationModelToVo(specModel, SpecVo.class);
+		// 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+		return new ResponseEntity<ResponseVo<SpecVo>>(ResponseVo.success("查询成功", specVo), HttpStatus.OK);
+	}
 
-    @ApiOperation(value = "规则分页查询规格引用", notes = "规则分页查询规格引用")
-    @ResponseBody
-    @RequestMapping(value = "/SepcQuote", method = RequestMethod.GET)
-    public ResponseEntity<ResponseVo<SpecVo>> querySepcQuote( @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
-        PaginationModel<SpecModel> specModel = specService.querySepcQuote((page - 1) * limit, limit);
-        PaginationVo<SpecVo> specVo = VoConvertor.convertPaginationModelToVo(specModel, SpecVo.class);
-        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
-        return new ResponseEntity<ResponseVo<SpecVo>>(ResponseVo.success("查询成功", specVo), HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "规则详情查看规格列表", notes = "规则值")
-    @ResponseBody
-    @RequestMapping(value = "/SepcList", method = RequestMethod.POST)
-    public ResponseEntity<ResponseVo<SpecVo>> querySepcList(@RequestBody IdListVo ids) {
-        List<SpecModel> specModel = specService.querySepcList(ids.getIds());
-        List<SpecVo> specVo =EntityCopyUtils.copyList(specModel,SpecVo.class);
-        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
-        return new ResponseEntity<ResponseVo<SpecVo>>(ResponseVo.success("查询成功", specVo), HttpStatus.OK);
-    }
+	@ApiOperation(value = "规则详情查看规格列表", notes = "规则值")
+	@ResponseBody
+	@RequestMapping(value = "/SepcList", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo<SpecVo>> querySepcList(@RequestBody IdListVo ids) {
+		List<SpecModel> specModel = specService.querySepcList(ids.getIds());
+		List<SpecVo> specVo = EntityCopyUtils.copyList(specModel, SpecVo.class);
+		// 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+		return new ResponseEntity<ResponseVo<SpecVo>>(ResponseVo.success("查询成功", specVo), HttpStatus.OK);
+	}
 }

@@ -10,9 +10,9 @@ import java.io.Serializable;
 @ToString
 public class DetailsVo implements Serializable {
 
-    private static final long serialVersionUID = -2970827720074085112L;
-    @ApiModelProperty(value = "ID",name = "id" )
-        private String id;
-        @ApiModelProperty(value = "引用值（规则详情删除之后的留规则值，规则包详情删除之后的规则包值）",name = "ValueRef" )
-        private String ValueRef;
+	private static final long serialVersionUID = -2970827720074085112L;
+	@ApiModelProperty(value = "ID", name = "id")
+	private String id;
+	@ApiModelProperty(value = "引用值（规则详情删除之后的留规则值，规则包详情删除之后的规则包值）", name = "ValueRef")
+	private String ValueRef;
 }

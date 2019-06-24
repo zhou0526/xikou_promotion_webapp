@@ -91,7 +91,7 @@ public class RuleController {
 	@RequestMapping(value = "/modifyRule", method = RequestMethod.POST)
 	public ResponseEntity<RuleVo> modifyRulePack(@RequestBody DetailsVo detailsVo) throws BusinessException {
 		try {
-			ruleService.modifyRule(detailsVo.getId(),detailsVo.getValueRef());
+			ruleService.modifyRule(detailsVo.getId(), detailsVo.getValueRef());
 		} catch (BusinessException ex) {
 			return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
 		}
@@ -132,28 +132,28 @@ public class RuleController {
 	}
 
 	@ApiOperation(value = "获取规则子集类型", notes = "获取规则类型")
-    @ResponseBody
-    @RequestMapping(value = "/queryRuleSonType/{RuleType}", method = RequestMethod.POST)
-    public ResponseEntity<ResponseVo<RuleType>> queryRuleSonType(@RequestBody String ruleType) {
-        if (StringUtils.isBlank(ruleType)) {
-            throw new BusinessException(ExceptionCode.RULETYPE_IS_NULL_EXCEPTION.getCode(), //
-                    ExceptionCode.RULETYPE_IS_NULL_EXCEPTION.getMessage());
-        }
-        List<RuleType> sonType=null;
-        if (ruleType.equals("1")){
-            sonType = RuleType.ActivityCommodityType();
-         }else if (ruleType.equals("2")){
-            sonType = RuleType.PromotionType();
-        }else if (ruleType.equals("3")){
-            sonType = RuleType.CustomizeType();
-        }else if (ruleType.equals("4")){
-            sonType = RuleType.DisplayModeType();
-        }
-        List<RuleTypeVo> ruleTypeVo =EntityCopyUtils.copyList(sonType,RuleTypeVo.class);
-        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
-        return new ResponseEntity<ResponseVo<RuleType>>(ResponseVo.success("查询成功", ruleTypeVo), HttpStatus.OK);
-    
-    }
+	@ResponseBody
+	@RequestMapping(value = "/queryRuleSonType/{RuleType}", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo<RuleType>> queryRuleSonType(@RequestBody String ruleType) {
+		if (StringUtils.isBlank(ruleType)) {
+			throw new BusinessException(ExceptionCode.RULETYPE_IS_NULL_EXCEPTION.getCode(), //
+				ExceptionCode.RULETYPE_IS_NULL_EXCEPTION.getMessage());
+		}
+		List<RuleType> sonType = null;
+		if (ruleType.equals("1")) {
+			sonType = RuleType.ActivityCommodityType();
+		} else if (ruleType.equals("2")) {
+			sonType = RuleType.PromotionType();
+		} else if (ruleType.equals("3")) {
+			sonType = RuleType.CustomizeType();
+		} else if (ruleType.equals("4")) {
+			sonType = RuleType.DisplayModeType();
+		}
+		List<RuleTypeVo> ruleTypeVo = EntityCopyUtils.copyList(sonType, RuleTypeVo.class);
+		// 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+		return new ResponseEntity<ResponseVo<RuleType>>(ResponseVo.success("查询成功", ruleTypeVo), HttpStatus.OK);
+
+	}
 
 	@ApiOperation(value = "获取促销工具类别", notes = "获取促销工具类别")
 	@ResponseBody
@@ -165,29 +165,28 @@ public class RuleController {
 		return new ResponseEntity<ResponseVo<RuleType>>(ResponseVo.success("查询成功", ruleTypeVo), HttpStatus.OK);
 	}
 
-
-    @ApiOperation(value = "根据规则子集获取促销工具", notes = "根据规则子集获取促销工具")
-    @ResponseBody
-    @RequestMapping(value = "/queryConditionRuleSonType", method = RequestMethod.POST)
-    public ResponseEntity<ResponseVo<RuleType>> queryConditionRuleSonType(@RequestBody String citationClassification) {
-        if (StringUtils.isBlank(citationClassification)) {
-            throw new BusinessException(ExceptionCode.RULECHILDREF_IS_NULL_EXCEPTION.getCode(), //
-                    ExceptionCode.RULECHILDREF_IS_NULL_EXCEPTION.getMessage());
-        }
-        List<RuleType> toolType=null;
-        if (citationClassification.equals("1")){
+	@ApiOperation(value = "根据规则子集获取促销工具", notes = "根据规则子集获取促销工具")
+	@ResponseBody
+	@RequestMapping(value = "/queryConditionRuleSonType", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo<RuleType>> queryConditionRuleSonType(@RequestBody String citationClassification) {
+		if (StringUtils.isBlank(citationClassification)) {
+			throw new BusinessException(ExceptionCode.RULECHILDREF_IS_NULL_EXCEPTION.getCode(), //
+				ExceptionCode.RULECHILDREF_IS_NULL_EXCEPTION.getMessage());
+		}
+		List<RuleType> toolType = null;
+		if (citationClassification.equals("1")) {
 			toolType = RuleType.PromotionToolType1();
-        }else if (citationClassification.equals("2")){
+		} else if (citationClassification.equals("2")) {
 			toolType = RuleType.PromotionToolType2();
-        }else if (citationClassification.equals("3")){
+		} else if (citationClassification.equals("3")) {
 			toolType = RuleType.PromotionToolType3();
-        }else if (citationClassification.equals("4")){
+		} else if (citationClassification.equals("4")) {
 			toolType = RuleType.PromotionToolType4();
 
-        }
-        List<RuleTypeVo> ruleTypeVo =EntityCopyUtils.copyList(toolType,RuleTypeVo.class);
-        // 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
-        return new ResponseEntity<ResponseVo<RuleType>>(ResponseVo.success("查询成功", ruleTypeVo), HttpStatus.OK);
+		}
+		List<RuleTypeVo> ruleTypeVo = EntityCopyUtils.copyList(toolType, RuleTypeVo.class);
+		// 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
+		return new ResponseEntity<ResponseVo<RuleType>>(ResponseVo.success("查询成功", ruleTypeVo), HttpStatus.OK);
 
-    }
+	}
 }
