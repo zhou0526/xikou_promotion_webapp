@@ -27,12 +27,12 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		return new String[] { "/" };// for example: /web/*
 	}
 
-	@Override
+	/*@Override
 	protected Filter[] getServletFilters() {
 
 		Filter[] singleton = { new WebAppCORSFilter() };
 		return singleton;
-	}
+	}*/
 
 	@Override
 	protected DispatcherServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
