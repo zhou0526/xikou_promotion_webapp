@@ -80,4 +80,10 @@
     <motan:referer id="RuleBusinessInteractionService"
                    interface="com.xikou.promotion.api.service.rulebusinessinteraction.RuleBusinessInteractionService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
+    <motan:referer id="promotionBuyGiftCommodityService"
+                   interface="com.xikou.promotion.api.service.buygift.PromotionBuyGiftCommodityService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
+
 </beans>
