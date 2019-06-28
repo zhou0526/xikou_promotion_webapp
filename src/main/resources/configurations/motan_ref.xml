@@ -53,6 +53,10 @@
                    interface="com.xikou.promotion.api.service.PromotionService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 
+    <motan:referer id="activityCommodityApplyService"
+                   interface="com.xikou.promotion.api.service.activity.ActivityCommodityApplyService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
     <motan:referer id="promotionActivityService"
                    interface="com.xikou.promotion.api.service.activity.PromotionActivityService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
@@ -64,10 +68,6 @@
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
     <motan:referer id="RuleService"
                    interface="com.xikou.promotion.api.service.rule.RuleService"
-                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
-
-    <motan:referer id="activityCommodityService"
-                   interface="com.xikou.promotion.api.service.activity.ActivityCommodityService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 
     <motan:referer id="commodityCombinedService"
