@@ -1,4 +1,4 @@
-package com.xikou.promotion.controller.rulebusinessinteraction;
+package com.xikou.promotion.controller.rulepack;
 
 import java.util.List;
 
@@ -19,7 +19,6 @@ import com.xikou.promotion.api.model.RuleBusinessInteractionModel;
 import com.xikou.promotion.api.service.rulebusinessinteraction.RuleBusinessInteractionService;
 import com.xikou.promotion.common.ResponseVo;
 import com.xikou.promotion.vo.RuleBusinessInteractionVo;
-import com.xikou.promotion.vo.RuleVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
