@@ -47,5 +47,19 @@ public class PromotionBuyGiftCommodityVo {
 	private Integer marketPrice;
 	@ApiModelProperty(value = "活动价")
 	private Integer commodityPrice;
+	@ApiModelProperty(value = "商品后台一级分类(查询时使用,冗余)")
+	private String categoryRef1;
+	@ApiModelProperty(value = "商品后台二级分类(查询时使用,冗余)")
+	private String categoryRef2;
+	@ApiModelProperty(value = "商品后台三级分类(查询时使用,冗余)")
+	private String categoryRef3;
+	@ApiModelProperty(value = "商品后台类名名称(冗余)")
+	private String categoryName;
+	@ApiModelProperty(value = "商品货号(冗余)")
+	private String goodsCode;
+	@ApiModelProperty(value = " 商品规格")
+	private String commoditySpec;
+	@ApiModelProperty(value = "商品型号")
+	private String commodityModel;
 
 }
