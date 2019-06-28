@@ -85,5 +85,13 @@
                    interface="com.xikou.promotion.api.service.buygift.PromotionBuyGiftCommodityService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 
-
+    <motan:referer id="promotionMoreDiscountCommodityService"
+                   interface="com.xikou.promotion.api.service.morediscount.PromotionMoreDiscountCommodityService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+    <motan:referer id="promotionBuyerCartService"
+                   interface="com.xikou.promotion.api.service.morediscount.PromotionBuyerCartService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+    <motan:referer id="promotionMoreDiscountRuleService"
+                   interface="com.xikou.promotion.api.service.morediscount.PromotionMoreDiscountRuleService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
 </beans>
