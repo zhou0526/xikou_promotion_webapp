@@ -49,6 +49,13 @@
                         application="promotion-platform" protocol="few_request_connetion" registry="${registry.mode}"
                         id="promotionBasicConfig" throwException="true" check="false"/>
 
+    <!-- 通用referer基础配置,若客户端在无可用server不进行心跳调度,可以设置check=false -->
+    <!-- 由于motan referer来覆盖basicReferer的requestTimeout参数值稍微有延迟 故初始化时配置requestTimeout稍大一点 -->
+    <motan:basicReferer requestTimeout="1000" accessLog="false" filter="opentracing"
+                        retries="0" group="merchant-service" module="merchant-service"
+                        application="merchant-platform" protocol="few_request_connetion" registry="${registry.mode}"
+                        id="merchantBasicConfig" throwException="true" check="false"/>
+
     <motan:referer id="promotionService"
                    interface="com.xikou.promotion.api.service.PromotionService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
@@ -91,7 +98,8 @@
     <motan:referer id="promotionBuyerCartService"
                    interface="com.xikou.promotion.api.service.morediscount.PromotionBuyerCartService"
                    connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
-    <motan:referer id="promotionMoreDiscountRuleService"
-                   interface="com.xikou.promotion.api.service.morediscount.PromotionMoreDiscountRuleService"
-                   connectTimeout="20000" requestTimeout="20000" basicReferer="promotionBasicConfig"/>
+
+    <motan:referer id="businessService"
+                   interface="com.xikou.merchant.api.service.BusinessService"
+                   connectTimeout="20000" requestTimeout="20000" basicReferer="merchantBasicConfig"/>
 </beans>
