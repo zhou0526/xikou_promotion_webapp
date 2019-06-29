@@ -61,5 +61,9 @@ public class PromotionBuyGiftCommodityVo {
 	private String commoditySpec;
 	@ApiModelProperty(value = "商品型号")
 	private String commodityModel;
+	@ApiModelProperty(value = "消耗任务值")
+	private Integer consumptionTaskValue;
+	@ApiModelProperty(value = "消耗次数")
+	private Integer consumptionNum;
 
 }
