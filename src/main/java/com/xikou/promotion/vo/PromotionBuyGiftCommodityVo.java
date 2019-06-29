@@ -32,9 +32,9 @@ public class PromotionBuyGiftCommodityVo {
 	@ApiModelProperty(value = "库存")
 	private Long stock;
 	@ApiModelProperty(value = "销售状态（1:在售，2:售罄）")
-	private Byte state;
+	private Integer state;
 	@ApiModelProperty(value = "是否上架，1：是，2：否")
-	private Byte online;
+	private Integer online;
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 	@ApiModelProperty(value = "修改时间")

@@ -22,7 +22,7 @@ public class PromotionActivityVo implements Serializable {
 	@ApiModelProperty(value = "活动ID")
 	private String id;
 	@ApiModelProperty(value = "1:买一赠二(吾G)，2: 全球买手, 3：0元竞拍 4:多买多折，5:砍价得红包，6:定制拼团")
-	private Byte activityType;
+	private Integer activityType;
 	@ApiModelProperty(value = "活动名称")
 	private String name;
 	@ApiModelProperty(value = "宣传描述1")
@@ -50,13 +50,13 @@ public class PromotionActivityVo implements Serializable {
 	@ApiModelProperty(value = "活动banner图片地址")
 	private String bannerUrl;
 	@ApiModelProperty(value = "邮费方式（1、包邮 2.固定邮费 3.引用邮费模版）")
-	private Byte postageWay;
+	private Integer postageWay;
 	@ApiModelProperty(value = "邮费值")
 	private Integer postage;
 	@ApiModelProperty(value = "引用邮费模板id")
 	private String postageRef;
 	@ApiModelProperty(value = "活动是否预热(1: 不预热 2: 预热)")
-	private Byte isPreheat;
+	private Integer isPreheat;
 	@ApiModelProperty(value = "活动预热提前时长 单位（天）")
 	private Integer preheatTime;
 	@ApiModelProperty(value = "活动开始时间")
@@ -66,7 +66,7 @@ public class PromotionActivityVo implements Serializable {
 	@ApiModelProperty(value = "优先级")
 	private Integer priority;
 	@ApiModelProperty(value = "开关状态 1: 开启  2:关闭")
-	private Byte switchState;
+	private Integer switchState;
 	@ApiModelProperty(value = "活动备注")
 	private String remark;
 	@ApiModelProperty(value = "是否支持寄卖(1: 支持 2: 不支持)")
@@ -74,9 +74,9 @@ public class PromotionActivityVo implements Serializable {
 	@ApiModelProperty(value = "设置最大允许寄卖时长(10天)")
 	private Integer maxConsignmentDuration;
 	@ApiModelProperty(value = "活动状态 1: 未开始  2:预热中 3: 活动中 4: 已失效")
-	private Byte state;
+	private Integer state;
 	@ApiModelProperty(value = "逻辑删除字段  (1: 未删除 2: 已删除)")
-	private Byte isDeleted;
+	private Integer isDeleted;
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 	@ApiModelProperty(value = "修改时间")
