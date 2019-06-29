@@ -1,9 +1,6 @@
 package com.xikou.promotion.controller.morediscount;
 
-import com.xikou.promotion.api.condition.VerifyAddingShoppingCartsCondition;
-import com.xikou.promotion.api.model.PromotionBuyerCartModel;
-import com.xikou.promotion.vo.PromotionBuyerCartVo;
-import com.xikou.promotion.vo.PromotionMoreDiscountCommodityVo;
+import com.xikou.promotion.vo.PromotionMoreDiscountRuleVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +13,11 @@ import com.xikou.common.model.PaginationVo;
 import com.xikou.common.utils.EntityCopyUtils;
 import com.xikou.common.utils.VoConvertor;
 import com.xikou.promotion.api.condition.PromotionMoreDiscountRuleCondition;
+import com.xikou.promotion.api.condition.VerifyAddingShoppingCartsCondition;
 import com.xikou.promotion.api.exception.BusinessException;
 import com.xikou.promotion.api.model.PromotionMoreDiscountRuleModel;
 import com.xikou.promotion.api.service.morediscount.PromotionMoreDiscountRuleService;
 import com.xikou.promotion.common.ResponseVo;
-import com.xikou.promotion.vo.PromotionMoreDiscountRuleVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -88,7 +85,7 @@ public class PromotionMoreDiscountRuleController {
 	@ApiOperation(value = "根据activityId查询多买多折规则", notes = "绑定活动Id")
 	@ResponseBody
 	@RequestMapping(value = "/queryMoreDiscountRule/{activityId}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<PromotionMoreDiscountRuleVo>> queryMoreDiscountRule(@RequestBody String activityId) {
+	public ResponseEntity<ResponseVo<PromotionMoreDiscountRuleVo>> queryMoreDiscountRule(@PathVariable("activityId") String activityId) {
 
 		PromotionMoreDiscountRuleModel promotionMoreDiscountRuleModel = promotionMoreDiscountRuleService.queryMoreDiscountRule(activityId);
 		PromotionMoreDiscountRuleVo promotionMoreDiscountRuleVo = EntityCopyUtils.copyBean(promotionMoreDiscountRuleModel, PromotionMoreDiscountRuleVo.class);

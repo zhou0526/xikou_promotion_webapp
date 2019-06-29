@@ -1,5 +1,8 @@
 package com.xikou.promotion.controller.morediscount;
 
+import java.util.List;
+
+import com.xikou.promotion.vo.PromotionMoreDiscountCommodityVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +15,14 @@ import com.xikou.common.model.PaginationVo;
 import com.xikou.common.utils.EntityCopyUtils;
 import com.xikou.common.utils.VoConvertor;
 import com.xikou.promotion.api.condition.PromotionMoreDiscountCommodityCondition;
+import com.xikou.promotion.api.condition.ReductionnventoryCondition;
 import com.xikou.promotion.api.exception.BusinessException;
 import com.xikou.promotion.api.model.PromotionMoreDiscountCommodityModel;
 import com.xikou.promotion.api.service.morediscount.PromotionMoreDiscountCommodityService;
 import com.xikou.promotion.common.ResponseVo;
-import com.xikou.promotion.vo.PromotionMoreDiscountCommodityVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
-import java.security.cert.Extension;
-import java.util.List;
 
 @Api(tags = "多买多折活动商品管理")
 @RestController
@@ -87,20 +87,20 @@ public class PromotionMoreDiscountCommodityController {
 	@ApiOperation(value = "多买多折活动商品上下架", notes = "ID,是否上架(1.是，2.否)")
 	@ResponseBody
 	@RequestMapping(value = "/modifyOnline", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> modifyOnline(@PathVariable("id") String id, @PathVariable("online") Byte online) throws BusinessException {
+	public ResponseEntity<ResponseVo> modifyOnline(@RequestParam String id, @RequestParam Integer online) throws BusinessException {
 
 		try {
 			promotionMoreDiscountCommodityService.modifyOnline(id, online);
 		} catch (BusinessException ex) {
 			return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
 		}
-		return new ResponseEntity(ResponseVo.success("删除成功", ""), HttpStatus.OK);
+		return new ResponseEntity(ResponseVo.success("操作成功", ""), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "验证起量", notes = "ID,当前商品选择的数量")
 	@ResponseBody
-	@RequestMapping(value = "/verificationThreshold/{id}", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> verificationThreshold(@PathVariable("id") String id, @PathVariable("number") Integer number) throws BusinessException {
+	@RequestMapping(value = "/verificationThreshold", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> verificationThreshold(@RequestParam String id, @RequestParam Integer number) throws BusinessException {
 
 		try {
 			promotionMoreDiscountCommodityService.verificationThreshold(id, number);
@@ -113,7 +113,7 @@ public class PromotionMoreDiscountCommodityController {
 	@ApiOperation(value = "根据activityId查询多买多折活动商品", notes = "绑定活动Id")
 	@ResponseBody
 	@RequestMapping(value = "/queryMoreDiscountCommodityList/{activityId}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<PromotionMoreDiscountCommodityVo>> queryMoreDiscountCommodityList(@RequestBody String activityId) {
+	public ResponseEntity<ResponseVo<PromotionMoreDiscountCommodityVo>> queryMoreDiscountCommodityList(@PathVariable("activityId") String activityId) {
 
 		List<PromotionMoreDiscountCommodityModel> promotionMoreDiscountCommodityModel = promotionMoreDiscountCommodityService.queryMoreDiscountCommodityList(activityId);
 		List<PromotionMoreDiscountCommodityVo> promotionMoreDiscountCommodityVo = EntityCopyUtils.copyList(promotionMoreDiscountCommodityModel, PromotionMoreDiscountCommodityVo.class);
@@ -125,12 +125,36 @@ public class PromotionMoreDiscountCommodityController {
 	@ApiOperation(value = "根据Id查询多买多折活动商品", notes = "多买多折活动商品表id")
 	@ResponseBody
 	@RequestMapping(value = "/queryMoreDiscountCommodity/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<PromotionMoreDiscountCommodityVo>> queryMoreDiscountCommodity(@RequestBody String id) {
+	public ResponseEntity<ResponseVo<PromotionMoreDiscountCommodityVo>> queryMoreDiscountCommodity(@PathVariable("id") String id) {
 
 		PromotionMoreDiscountCommodityModel promotionMoreDiscountCommodityModel = promotionMoreDiscountCommodityService.queryMoreDiscountCommodity(id);
 		PromotionMoreDiscountCommodityVo promotionMoreDiscountCommodityVo = EntityCopyUtils.copyBean(promotionMoreDiscountCommodityModel, PromotionMoreDiscountCommodityVo.class);
 
 		// 返回200只表示网络请求成功 只有当ResponseVo的code为1时才代表接口响应返回成功!
 		return new ResponseEntity<ResponseVo<PromotionMoreDiscountCommodityVo>>(ResponseVo.success("查询成功", promotionMoreDiscountCommodityVo), HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "操作虚拟库存", notes = "操作虚拟库存")
+	@ResponseBody
+	@RequestMapping(value = "/operatingVirtualStock", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> operatingVirtualStock(ReductionnventoryCondition reductionnventoryCondition) throws BusinessException  {
+		try {
+			promotionMoreDiscountCommodityService.operatingVirtualStock(reductionnventoryCondition);
+		} catch (BusinessException ex) {
+			return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
+		}
+		return new ResponseEntity(ResponseVo.success("操作成功", ""), HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "操作库存", notes = "操作库存")
+	@ResponseBody
+	@RequestMapping(value = "/operatingStock", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> operatingStock(ReductionnventoryCondition reductionnventoryCondition) throws BusinessException  {
+		try {
+			promotionMoreDiscountCommodityService.operatingStock(reductionnventoryCondition);
+		} catch (BusinessException ex) {
+			return new ResponseEntity(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
+		}
+		return new ResponseEntity(ResponseVo.success("操作成功", ""), HttpStatus.OK);
 	}
 }

@@ -1,5 +1,6 @@
 package com.xikou.promotion.controller.morediscount;
 
+import com.xikou.promotion.vo.PromotionBuyerCartVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import com.xikou.promotion.api.exception.BusinessException;
 import com.xikou.promotion.api.model.PromotionBuyerCartModel;
 import com.xikou.promotion.api.service.morediscount.PromotionBuyerCartService;
 import com.xikou.promotion.common.ResponseVo;
-import com.xikou.promotion.vo.PromotionBuyerCartVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,10 +47,10 @@ public class PromotionBuyerCartController {
 		return new ResponseEntity<ResponseVo<PromotionBuyerCartVo>>(ResponseVo.success("查询成功", promotionBuyerCartVo), HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "根据id查询多买多折购物车", notes = "购买用户ID")
+	@ApiOperation(value = "根据购买用户ID查询多买多折购物车", notes = "购买用户ID")
 	@ResponseBody
 	@RequestMapping(value = "/queryAccordingID/{buyerUserId}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseVo<PromotionBuyerCartVo>> queryAccordingID(@RequestBody String buyerUserId) {
+	public ResponseEntity<ResponseVo<PromotionBuyerCartVo>> queryAccordingID(@PathVariable("buyerUserId") String buyerUserId) {
 
 		List<PromotionBuyerCartModel> promotionBuyerCartModel = promotionBuyerCartService.queryAccordingID(buyerUserId);
 		List<PromotionBuyerCartVo> promotionBuyerCartVo = EntityCopyUtils.copyList(promotionBuyerCartModel, PromotionBuyerCartVo.class);
