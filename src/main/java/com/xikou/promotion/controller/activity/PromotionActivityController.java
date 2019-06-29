@@ -11,7 +11,6 @@ import com.xikou.common.model.PaginationModel;
 import com.xikou.common.model.PaginationVo;
 import com.xikou.common.utils.EntityCopyUtils;
 import com.xikou.common.utils.VoConvertor;
-import com.xikou.promotion.api.condition.ActivityOptionCondition;
 import com.xikou.promotion.api.condition.PromotionActivityCondition;
 import com.xikou.promotion.api.exception.BusinessException;
 import com.xikou.promotion.api.model.PromotionActivityModel;
@@ -92,12 +91,24 @@ public class PromotionActivityController {
 		}
 	}
 
-	@ApiOperation(value = "活动开启/关闭", notes = "活动开启/关闭")
+	@ApiOperation(value = "开启活动", notes = "开启活动")
 	@ResponseBody
-	@RequestMapping(value = "/startOrStopActivity", method = RequestMethod.POST)
-	public ResponseEntity<ResponseVo> startOrStopActivity(@RequestBody ActivityOptionCondition condition) {
+	@RequestMapping(value = "/startActivity", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> startActivity(@PathVariable String activityId) {
 		try {
-			promotionActivityService.startOrStopActivity(condition);
+			promotionActivityService.startActivity(activityId);
+			return new ResponseEntity<>(ResponseVo.success("操作成功", ""), HttpStatus.OK);
+		} catch (BusinessException ex) {
+			return new ResponseEntity<>(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
+		}
+	}
+
+	@ApiOperation(value = "禁用活动", notes = "禁用活动")
+	@ResponseBody
+	@RequestMapping(value = "/stopActivity", method = RequestMethod.POST)
+	public ResponseEntity<ResponseVo> stopActivity(@PathVariable String activityId) {
+		try {
+			promotionActivityService.stopActivity(activityId);
 			return new ResponseEntity<>(ResponseVo.success("操作成功", ""), HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(ResponseVo.unsuccess(ex.getMessage()), HttpStatus.OK);
