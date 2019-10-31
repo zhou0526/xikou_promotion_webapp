@@ -23,7 +23,7 @@
         <consul.version>1.3.0</consul.version><!-- 1.3.0-->
         <zookeeper.version>3.4.8</zookeeper.version>
         <guava.version>19.0</guava.version>
-        <netty.version>4.1.16.Final</netty.version><!--4.1.16.Final -->
+        <netty.version>4.1.42.Final</netty.version><!--4.1.16.Final -->
         <metrics.version>3.0.1</metrics.version>
         <hessian.version>4.0.38</hessian.version>
         <xikouplatform.version>1.0.0-SNAPSHOT</xikouplatform.version>
